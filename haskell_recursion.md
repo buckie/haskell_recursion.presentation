@@ -121,7 +121,7 @@ as fast.
 
 ```haskell
 facc 0 a = a
-facc n a = facc (a*n) (n-1)
+facc n a = facc (n-1) (a*n)
 ```
 
 --
@@ -130,7 +130,7 @@ facc n a = facc (a*n) (n-1)
 
 ```haskell
 facc 0 a = a
-facc n a = facc (a*n) (n-1)
+facc n a = facc (n-1) (a*n)
 ```
 
 ```haskell
