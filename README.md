@@ -6,5 +6,5 @@ information. And destroy your laundry.
 
 # Typeset
 
-`nodemon -x 'cleaver haskell_recursion.md'`
+`nodemon -e md -x 'cleaver haskell_recursion.md'`
 
