@@ -1,10 +1,10 @@
-# Haskell, Recursion, Orders of Growth buffet
+# Haskell, Recursion, Orders of Growth, Tail Recursion, The Universe and everything
 
-Like many other buffets, it will probably leave you overstuffed with incorrect
+Like many other buffets, it will probably leave you nauseated with incorrect
 information. And destroy your laundry.
 
 
 # Typeset
 
-`nodemon -x 'cleaver haskell-recursion-ordres-of-growth-buffet.md'`
+`nodemon -x 'cleaver haskell_recursion.md'`
 
