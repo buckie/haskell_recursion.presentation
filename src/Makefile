@@ -1,2 +1,2 @@
 main:
-	ghc -O2 -o factorialz Main.hs
+	ghc -o factorialz Main.hs
