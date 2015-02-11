@@ -71,10 +71,10 @@ factorial n = n * factorial(n-1)
 ```
 
 ```haskell
-  -- execution                            -- +-------> time
+  -- execution                            -- +-----> space
 λ ↦ factorial 4                           -- |
   = 4 * factorial 3                       -- |
-  = 4 * 3 * factorial 2                   -- v space
+  = 4 * 3 * factorial 2                   -- v time
   = 4 * 3 * 2 * factorial 1
   = 4 * 3 * 2 * 1 * factorial 0 -- BAM! base case
   = 4 * 3 * 2 * 1 * 1
@@ -99,7 +99,7 @@ The accumulator factorial is sort of the dirtier, fouler mouthed sibling of
 
 ```haskell
 facc 0 a = a
-facc n a = facc (n-1) (a*n)
+facc n a = facc((n-1) (a*n))
 ```
 
 --
