@@ -6,6 +6,6 @@ factorial n = n * factorial(n-1)
 
 facc :: Integer -> Integer -> Integer
 facc 0 a = a
-facc n !a = facc (n-1) $! (a*n)
+facc n a = facc (n-1) (a*n)
 
 
