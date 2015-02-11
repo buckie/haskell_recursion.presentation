@@ -1,0 +1,2 @@
+(A) finish slides
+(A) check running times with TOM
