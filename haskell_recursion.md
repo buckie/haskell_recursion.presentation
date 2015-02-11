@@ -1,16 +1,16 @@
-title: Haskell, Recursion, Orders of Growth buffet
+title: Recursion in Haskell
 author: Martino Visintin
 output: presentation.html
 controls: false
 
 --
 
-# Recursion in Haskell
-## Haskell, Recursion, Orders of Growth, Tail Recursion, the Universe and Everything
+# Silly Recursion Example
+## a.k.a. Haskell, Recursion, Orders of Growth, Tail Recursion, Tail Call Optimisation, the Universe and Everything
 
 --
 
-### State
+### Mutable state in Haskell: Nope.
 <!-- Haskell being a purely functional language.. -->
 
 ```haskell
@@ -18,30 +18,30 @@ x = 1
 x = 2 -- ERROR: multiple declarations of x
 ```
 
-So, this code:
+And, this code, no matter where it is:
 
 ```haskell
  -- some code
 x = x + 1
 ```
 
-... is **always** gonna be:
+... is **always**, **always** gonna be either:
 
-- a compiler error (if `some code` contains a previous declaration of x)
-- an infinite loop (runtime exception on evaluation of x)
+- a compiler error (... if `some code` already declared x)
+- an infinite loop (~~well actually~~ a runtime exception on the evaluation of x)
 
 --
 
-### OMG Factorials!
+### Factorials!
 
-This sort of thing ain't gonna fly for shure:
+This sort of thing ain't gonna fly well with Haskell:
 
 ```ruby
 def factorial(n)
   result = 1
-  while(n > 1) do   # no while loop in haskell
-    result *= n     # state mutation
-    n -= 1          # more state mutation
+  while(n > 1) do   # <~ no while/for loops in haskell
+    result *= n     # <~ state mutation, definitely a no-no
+    n -= 1          # <~ OH my! more state mutation!
   end
   return result
 end
@@ -71,53 +71,31 @@ factorial n = n * factorial(n-1)
 ```
 
 ```haskell
-  -- execution
-λ ↦ factorial 4
-  ↦ 4 * factorial 3
-  ↦ 4 * 3 * factorial 2
-  ↦ 4 * 3 * 2 * factorial 1
-  ↦ 4 * 3 * 2 * 1 * factorial 0 -- BAM! base case
-  ↦ 4 * 3 * 2 * 1 * 1
-  ↦ 12 * 2 * 1 * 1
-  ↦ 24 * 1 * 1
-  ↦ 24
+  -- execution                            -- +-------> time
+λ ↦ factorial 4                           -- |
+  = 4 * factorial 3                       -- |
+  = 4 * 3 * factorial 2                   -- v space
+  = 4 * 3 * 2 * factorial 1
+  = 4 * 3 * 2 * 1 * factorial 0 -- BAM! base case
+  = 4 * 3 * 2 * 1 * 1
+  = 24
 ```
 
 <!-- now if we consider the length as time and the
   width as memory.. -->
 
 ```
-Performance:
-  time:  2n + 1   ==>  O(n)
-memory:  n + 1    ==>  O(n)
+# Performance:
+  time: O(n)
+memory: O(n)  <= ಠ_ಠ . Booo, we know this can be done in O(1)!
 ```
 
 --
 
-# Cool, we're done.
-## `factorial` is always gonna be `O(n)` in time anyway.
-## ... and we're not gonna bother with the constant factors.
+### Accumulator `factorial` to the rescue
 
---
-
-### ~~Well actually...~~
-
-```
-Performance:
-  time:  2n + 1   ==>  O(n)
-memory:  n + 1    ==>  O(n)
-```
-
-Even if we don't care about the constant factor `2`, we still have a memory
-usage of `O(n)`.
-
---
-
-### Introducing the accumulator `factorial`
-
-The accumulator factorial is sort of the dirtier, fouler
-mouthed sibiling of `factorial`. In practice it is twice
-as fast.
+The accumulator factorial is sort of the dirtier, fouler mouthed sibling of
+`factorial`. But it works with `O(1)` memory:
 
 ```haskell
 facc 0 a = a
@@ -126,7 +104,7 @@ facc n a = facc (n-1) (a*n)
 
 --
 
-## Performance
+### Performance
 
 ```haskell
 facc 0 a = a
@@ -136,18 +114,24 @@ facc n a = facc (n-1) (a*n)
 ```haskell
   -- execution (sort of.)
 λ ↦ facc 4 1
-  ↦ facc (1*4) (4-1)
-  ↦ facc (4*3) (3-1)
-  ↦ facc (12*2) (2-1)
-  ↦ facc (24*1) (1-1)
-  ↦ facc 24 0
-  ↦ 24
+  = facc 3 4
+  = facc 2 12
+  = facc 1 24
+  = facc 0 24
+  = 24
 ```
 
 ```
-Performance:
-  time:  n + 1    ==>  O(n)
-memory:  k        ==>  O(1)
+# Performance:
+  time:  O(n)
+memory:  O(1) (^__^)
 ```
 
+--
+
+### Tail Recursion
+
+--
+
+### Tail Call optimisation
 
