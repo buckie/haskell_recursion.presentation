@@ -1,7 +1,14 @@
 # Factorialz! Enterprise Edition
 
-[Benchmark Results](http://htmlpreview.github.io/?https://github.com/buckie/haskell_recursion.presentation/blob/master/factorialz/results.html)
+# Code Being Benchmarked
 
+[src/Factorialz.hs](https://github.com/buckie/haskell_recursion.presentation/blob/master/factorialz/src/Factorial.hs)
+
+# Benchmark Results
+
+[Using NCG Backend (default)](http://htmlpreview.github.io/?https://github.com/buckie/haskell_recursion.presentation/blob/master/factorialz/results.html)
+
+[Using LLVM Backend](http://htmlpreview.github.io/?https://github.com/buckie/haskell_recursion.presentation/blob/master/factorialz/results-llvm.html)
 
 
 
