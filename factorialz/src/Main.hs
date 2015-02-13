@@ -25,4 +25,5 @@ main = defaultMain [ bgroup "generic factorial Integer" $ fmap (benchF factorial
                    , bgroup "integer strict fact" $ fmap (benchF (fac_strict_int )) inputs_int
                    , bgroup "integer strict fact no where" $ fmap (benchF (fac_strict_int_no_where 1 )) inputs_int
                    , bgroup "integer fact closure" $ fmap (benchF (fac_integer_closure )) inputs_int
+                   , bgroup "integer fact closure strict" $ fmap (benchF (fac_integer_closure_strict )) inputs_int
                    ]

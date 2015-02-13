@@ -48,3 +48,9 @@ fac_integer_closure n = go (# 1::Int, n::Int #)
                           where !accum' = n * accum
                                 !n'     = n-1
 
+fac_integer_closure_strict :: Int -> Int
+fac_integer_closure_strict n = go (# 1::Int, n::Int #)
+  where
+    go (# !accum, !0 #) = (accum::Int)
+    go (# !accum, !n #) = go (# n * accum, n-1 #)
+
