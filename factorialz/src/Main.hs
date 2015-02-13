@@ -17,9 +17,12 @@ main = defaultMain [ bgroup "generic factorial Integer" $ fmap (benchF factorial
                    , bgroup "integer specialized factorial" $ fmap (benchF factorial_Integer) inputs_integer
                    , bgroup "generic lazy fac int" $ fmap (benchF (fac 1)) inputs_integer
                    , bgroup "integer strict fact" $ fmap (benchF (fac_strict_integer )) inputs_integer
+                   , bgroup "integer strict fact no where" $ fmap (benchF (fac_strict_integer_no_where 1 )) inputs_integer
 
-                   ,bgroup "generic factorial Int" $ fmap (benchF factorial) inputs_int
+                   , bgroup "generic factorial Int" $ fmap (benchF factorial) inputs_int
                    , bgroup "int specialized factorial" $ fmap (benchF factorial_Int) inputs_int
                    , bgroup "generic lazy fac int" $ fmap (benchF (fac 1)) inputs_int
                    , bgroup "integer strict fact" $ fmap (benchF (fac_strict_int )) inputs_int
+                   , bgroup "integer strict fact no where" $ fmap (benchF (fac_strict_int_no_where 1 )) inputs_int
+                   , bgroup "integer fact closure" $ fmap (benchF (fac_integer_closure )) inputs_int
                    ]
