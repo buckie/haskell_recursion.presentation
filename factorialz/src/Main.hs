@@ -1,13 +1,13 @@
 module Main where
 
 import Criterion.Main
-import Data.Int
 import Factorial
+import Data.Int
 
 benchF :: (Show a) => (a -> b) -> a -> Benchmark
 benchF f x = bench (show x) $ whnf f x
 
-inputs :: [Integer]
+inputs :: [Int64]
 inputs = [10..13]
 
 main :: IO ()
